@@ -20,7 +20,7 @@
 
     } @else {
       <p>Welcome {{auth.connectedUser()?.email}}</p>
-      <ion-button>Logout</ion-button>
+      <ion-button (click)="auth.logout()">Logout</ion-button>
     }
   </div>
 </ion-content>
