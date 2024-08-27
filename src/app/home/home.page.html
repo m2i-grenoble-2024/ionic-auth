@@ -14,7 +14,13 @@
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    @if (!auth.connectedUser()) {
+      <ion-button routerLink="/login">Login</ion-button>
+      <ion-button routerLink="/register">Register</ion-button>
+
+    } @else {
+      <p>Welcome {{auth.connectedUser()?.email}}</p>
+      <ion-button>Logout</ion-button>
+    }
   </div>
 </ion-content>

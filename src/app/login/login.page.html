@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+        <ion-input label="Email" type="email" formControlName="email" 
+        errorText="You must enter a valid email" 
+        ></ion-input>
+        <ion-input label="Password" type="password" formControlName="password" 
+        errorText="A password is required"
+        ></ion-input>
+        <!-- On désactive le bouton et donc le formulaire tant que les champs sont pas valides -->
+        <ion-button type="submit" [disabled]="form.invalid">Login</ion-button>
+      </form>
+      <p>{{feedback}}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
