@@ -1,4 +1,8 @@
-import { HttpHeaders, HttpInterceptorFn } from "@angular/common/http";
+import { HttpErrorResponse, HttpHeaders, HttpInterceptorFn } from "@angular/common/http";
+import { inject } from "@angular/core";
+import { tap } from "rxjs";
+import { AuthService } from "./auth.service";
+import { Router } from "@angular/router";
 
 
 /**
@@ -11,6 +15,10 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
     if (!token) {
         return next(req)
     }
+
+    const auth = inject(AuthService);
+    const router = inject(Router);
+    
     //On crée un header Authorization dans lequel on concatène le token
     const headers = new HttpHeaders({
         Authorization: 'Bearer ' + token
@@ -20,6 +28,20 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
         headers
     })
     //On fait suivre la requête
-    return next(newReq)
+    return next(newReq).pipe(
+        tap({
+            error: (err) => {
+                if (err instanceof HttpErrorResponse) {
+                    if (err.status != 401) {
+                        return;
+                    }
+                    auth.logout();
+                    router.navigate(['login']);
+                }
+            }
+
+
+        })
+    )
 
 }
