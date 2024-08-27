@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { EmailValidator, FormBuilder, FormGroup, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonInput, IonButton, IonCard, IonCardContent } from '@ionic/angular/standalone';
 import { User } from '../entities';
 
@@ -9,16 +9,22 @@ import { User } from '../entities';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCard, IonButton, IonInput, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCardContent, IonCard, IonButton, IonInput, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, ReactiveFormsModule]
 })
 export class RegisterPage implements OnInit {
-  user:User = {
-    email:'',
-    password:''
-  }
-  constructor() { }
+  private fb:FormBuilder = inject(FormBuilder);
+  form =this.fb.group({
+    email:['', [Validators.email, Validators.required]],
+    password: ['', [Validators.required]]
+  });
+  
 
   ngOnInit() {
+    
+  }
+
+  handleSubmit() {
+    console.log(this.form.value)
   }
 
 }

@@ -7,17 +7,15 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-content>
-      <form>
-        <ion-input label="Email" type="email" name="email" 
-        email required
+      <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+        <ion-input label="Email" type="email" formControlName="email" 
         errorText="You should enter a valid email" 
-        [(ngModel)]="user.email"></ion-input>
-        <ion-input label="Password" type="password" name="password" 
-        required
+        ></ion-input>
+        <ion-input label="Password" type="password" formControlName="password" 
         errorText="A password is required"
-        [(ngModel)]="user.password"></ion-input>
+        ></ion-input>
 
-        <ion-button type="submit">Register</ion-button>
+        <ion-button type="submit" [disabled]="form.invalid">Register</ion-button>
       </form>
     </ion-card-content>
   </ion-card>
