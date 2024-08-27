@@ -12,4 +12,9 @@ import { RouterLink } from '@angular/router';
 })
 export class HomePage {
   constructor(public auth:AuthService) {}
+
+
+  testAuth() {
+    this.auth.getUser().subscribe(data => console.log(data)); 
+  }
 }

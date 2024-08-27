@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { User } from './entities';
-import { tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,12 @@ import { tap } from 'rxjs';
 export class AuthService {
   connectedUser = signal<User|null>(null);
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    const stored = localStorage.getItem('connectedUser');
+    if(stored) {
+      this.connectedUser.set(JSON.parse(stored));
+    }
+  }
 
   postUser(user:User) {
     return this.http.post<User>('http://localhost:8000/api/user', user);
@@ -20,13 +25,23 @@ export class AuthService {
                     .pipe(
                       tap(data => {
                         localStorage.setItem('token', data.token); //On stock le token en localStorage
-                        this.connectedUser.set({...credentials}); //temporaire
-                      })
+                      }),
+                      switchMap(() => this.getUser())
                     );
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.clear();
     this.connectedUser.set(null);
+  }
+
+  getUser() {
+    return this.http.get<User>('http://localhost:8000/api/user')
+            .pipe(
+              tap(data => {
+                localStorage.setItem('connectedUser', JSON.stringify(data));
+                this.connectedUser.set(data);
+              })
+            );
   }
 }
