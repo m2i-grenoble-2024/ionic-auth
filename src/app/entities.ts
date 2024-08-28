@@ -4,3 +4,11 @@ export interface User {
     password:string;
     role?:string;
 }
+
+export interface Annonce {
+    id?:number;
+    title:string;
+    description:string;
+    price:number;
+    user?:User;
+}

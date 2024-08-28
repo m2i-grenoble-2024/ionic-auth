@@ -1,6 +1,6 @@
-# AngularAuth
+# IonicAuth
 
-Projet angular avec de l'authentification JWT. Nécessite le projet [symfony-auth](https://github.com/m2i-grenoble-2024/symfony-auth) qui tourne pour fonctionner.
+Projet angular Ionic avec de l'authentification JWT. Nécessite le projet [symfony-auth](https://github.com/m2i-grenoble-2024/symfony-auth) qui tourne pour fonctionner. (tous les aspects d'authentification sont également valables pour un projet Angular classique)
 
 ## Nécessaire pour l'authentification
 Déjà, pour ce qui est du type d'authentification utilisé dans ce projet, il s'agit d'une connexion avec JWT, qui va donc se baser sur un token d'identification à stocker dans le front et à envoyer dans les headers de requêtes vers le serveur

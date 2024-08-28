@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Add Annonce</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+        <ion-input label="Title" formControlName="title"
+        errorText="A title is required"></ion-input>
+        <ion-textarea label="Description" formControlName="description"
+        errorText="A description is required"></ion-textarea>
+        <ion-input type="number" label="Price" formControlName="price"
+        errorText="A price above zero is required"></ion-input>
+
+        <ion-button type="submit" [disabled]="form.invalid">Add</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
