@@ -12,4 +12,8 @@ export class AnnonceService {
   add(annonce:Annonce) {
     return this.http.post<Annonce>('http://localhost:8000/api/annonce', annonce);
   }
+
+  fetchAll() {
+    return this.http.get<Annonce[]>('http://localhost:8000/api/annonce');
+  }
 }

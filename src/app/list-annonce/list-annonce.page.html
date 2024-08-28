@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>list-annonce</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let item of annonces | async">
+    <ion-card-header>
+      <ion-card-title>{{item.title}}</ion-card-title>
+      <ion-card-subtitle>{{item.user?.email}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+
+      <p [innerHTML]="item.description"></p>
+      <p>{{item.price}}€</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

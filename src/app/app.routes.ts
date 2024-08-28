@@ -22,4 +22,8 @@ export const routes: Routes = [
     path: 'add-annonce',
     loadComponent: () => import('./add-annonce/add-annonce.page').then( m => m.AddAnnoncePage)
   },
+  {
+    path: 'list-annonce',
+    loadComponent: () => import('./list-annonce/list-annonce.page').then( m => m.ListAnnoncePage)
+  },
 ];
