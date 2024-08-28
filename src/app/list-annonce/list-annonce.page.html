@@ -5,15 +5,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngFor="let item of annonces | async">
+  <ion-card *ngFor="let item of annonces">
     <ion-card-header>
       <ion-card-title>{{item.title}}</ion-card-title>
       <ion-card-subtitle>{{item.user?.email}}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
 
-      <p [innerHTML]="item.description"></p>
+      <p>{{item.description}}</p>
       <p>{{item.price}}€</p>
+      <ion-button *ngIf="item.user?.id == auth.connectedUser()?.id" (click)="removeAnnonce(item)">Delete</ion-button>
     </ion-card-content>
   </ion-card>
 

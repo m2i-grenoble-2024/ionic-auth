@@ -16,4 +16,8 @@ export class AnnonceService {
   fetchAll() {
     return this.http.get<Annonce[]>('http://localhost:8000/api/annonce');
   }
+
+  remove(id:any) {
+    return this.http.delete<void>('http://localhost:8000/api/annonce/'+id);
+  }
 }
